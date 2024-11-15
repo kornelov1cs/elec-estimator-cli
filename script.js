@@ -41,17 +41,30 @@ function processCommand(cmd) {
     }
 }
 
-input.addEventListener('keyup', function(event) {
-    if (event.key === 'Enter') {
-        const cmd = this.value.trim();
-        if (cmd) {
-            output.innerHTML += `<div>> ${cmd}</div>`;
-            output.innerHTML += `<div>${processCommand(cmd)}</div>`;
-        } else {
-            output.innerHTML += `<div>> </div>`;
-            output.innerHTML += `<div>Please enter a command. Type 'help' for available commands.</div>`;
+if (input) {
+    input.addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            const cmd = this.value.trim();
+            if (cmd) {
+                output.innerHTML += `<div>> ${cmd}</div>`;
+                output.innerHTML += `<div>${processCommand(cmd)}</div>`;
+            } else {
+                output.innerHTML += `<div>> </div>`;
+                output.innerHTML += `<div>Please enter a command. Type 'help' for available commands.</div>`;
+            }
+            this.value = '';
+            window.scrollTo(0, document.body.scrollHeight);
         }
-        this.value = '';
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-});
+    });
+
+    document.addEventListener('click', function() {
+        input.focus();
+    });
+
+    // Ensure the input is focused when the page loads
+    window.onload = function() {
+        input.focus();
+    };
+}
+
+module.exports = { processCommand };
