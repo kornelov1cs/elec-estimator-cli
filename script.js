@@ -2,7 +2,7 @@ const output = document.getElementById("output");
 const input = document.getElementById("cli-input");
 
 let currentState = "main";
-let electricityRate = null; // No default rate set
+let electricityRate = null;
 let currentWatts = 0;
 let appliances = [];
 let currentAppliance = {};
@@ -160,7 +160,7 @@ function handleCalculateDone(cmd) {
       return `Please set the electricity rate first. Enter the new electricity rate in $/kWh:`;
     }
     const totalUsage = calculateTotalUsage();
-    const monthlyUsage = totalUsage * 30; // Assuming 30 days in a month
+    const monthlyUsage = totalUsage * 30;
     const bill = monthlyUsage * electricityRate;
     currentState = "main";
     return `Your estimated monthly electricity bill is $${bill.toFixed(2)}.`;
